@@ -112,11 +112,17 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { app } from "@/utils/firebase";
 
 export default defineComponent({
   name: "HelloWorld",
   props: {
     msg: String,
+  },
+  created() {
+    console.log("created", process.env);
+    console.log("created", process.env.VUE_APP_API_KEY);
+    console.log("created", app);
   },
 });
 </script>
