@@ -14,6 +14,7 @@ const firebaseConfig = {
   messagingSenderId: process.env.VUE_APP_Messaging_Sender_Id,
   appId: "1:332971064767:web:bf9a3ea9840fd856da750a",
   measurementId: "G-D79GH72VKG",
+  databaseURL: `https://${process.env.VUE_APP_DATABASE_NAME}.${process.env.VUE_APP_DATABASE_REGION}.firebasedatabase.app`,
 };
 
 // Initialize Firebase

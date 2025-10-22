@@ -1,12 +1,19 @@
 <template>
+  <header class="header">
+    <router-link to="/">maCôt</router-link>
+  </header>
+  <router-view />
   <nav>
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
   </nav>
-  <router-view />
 </template>
 
 <style lang="scss">
+body {
+  margin: 0;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -25,6 +32,19 @@ nav {
     &.router-link-exact-active {
       color: #42b983;
     }
+  }
+}
+
+// dedicated component
+.header {
+  background-color: black;
+  padding: 12px;
+  font-size: 24px;
+  text-align: left;
+
+  a {
+    text-decoration: none;
+    color: white;
   }
 }
 </style>
