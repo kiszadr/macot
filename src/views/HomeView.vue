@@ -1,9 +1,8 @@
 <template>
   <div class="home">
-    <h3>
-      Welcome to mâCot - Your Cozy Corner for Handmade Crafts and Artisanal
-      Goods
-    </h3>
+    <h2>
+      {{ $t("home.welcomeMessage") }}
+    </h2>
     <router-link
       v-for="product in products"
       :key="product.id"
@@ -42,3 +41,16 @@ export default defineComponent({
   name: "HomeView",
 });
 </script>
+
+<style lang="scss" scoped>
+@import "@/styles/app_settings.scss";
+.home {
+  height: 100%;
+  padding: 0 map-get($settings, app-padding-horizontal);
+
+  h2 {
+    margin: 50px 0;
+    text-align: center;
+  }
+}
+</style>

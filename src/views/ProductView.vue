@@ -1,14 +1,7 @@
 <template>
   <div class="product-view">
-    <img
-      :class="{ 'product-view-gallery__mobile': screen.isMobile }"
-      class="product-view-gallery"
-      :src="mainImg"
-      :alt="product.title || 'empty image'"
-    />
-    <button :disabled="step === 0" @click="step--">previous</button>
-    <button :disabled="step === galleryLength - 1" @click="step++">next</button>
-    <article>
+    <product-gallery :gallery="product.gallery ?? []" :alt="product.title" />
+    <article class="product-view-article">
       <h1>{{ product.title }}</h1>
       <h3>
         {{ product.description1 }} <strong>{{ price }}</strong>
@@ -19,34 +12,20 @@
 </template>
 
 <script setup lang="ts">
+import ProductGallery from "@/components/Products/ProductGallery.vue";
 import { ref, computed, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { useProductsStore } from "@/stores/products";
-import { useScreenStore } from "@/stores/screen";
 import type { Product } from "@/types/products";
 
-const screen = useScreenStore();
 const productsStore = useProductsStore();
 const product = ref<Product>({} as Product);
-const step = ref(0);
 const route = useRoute();
-
-const mainImg = computed(() => {
-  return product.value && product.value.gallery
-    ? product.value.gallery[step.value]
-    : "../assets/logo.png";
-});
 
 const price = computed(() => {
   return product.value && product.value.price
     ? `${product.value.price} ${product.value.currency}`
     : "";
-});
-
-const galleryLength = computed(() => {
-  return product.value && product.value.gallery
-    ? product.value.gallery.length
-    : 0;
 });
 
 onMounted(async () => {
@@ -63,16 +42,11 @@ onMounted(async () => {
 </script>
 
 <style lang="scss" scoped>
-.product-view {
-  &-gallery {
-    background-color: black;
-    width: 100%;
-    height: 40vw;
-    object-fit: contain;
+@import "@/styles/app_settings.scss";
 
-    &__mobile {
-      height: 40vh;
-    }
+.product-view {
+  &-article {
+    padding: 0 map-get($settings, app-padding-horizontal);
   }
 }
 </style>

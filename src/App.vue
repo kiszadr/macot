@@ -1,50 +1,47 @@
 <template>
-  <header class="header">
-    <router-link to="/">maCôt</router-link>
-  </header>
-  <router-view />
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
+  <div class="app">
+    <app-header />
+    <div class="app-body">
+      <router-view />
+    </div>
+    <app-footer />
+  </div>
 </template>
 
+<script setup lang="ts">
+import AppHeader from "@/components/AppMain/AppHeader.vue";
+import AppFooter from "@/components/AppMain/AppFooter.vue";
+</script>
+
 <style lang="scss">
+@import "@/styles/app_settings.scss";
+
 body {
   margin: 0;
-}
-
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Roboto, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
 }
 
-nav {
-  padding: 30px;
+a {
+  text-decoration: none;
+}
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+.app {
+  height: 100vh;
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+  &-name {
+    font-family: "Times New Roman", Times, serif;
   }
-}
 
-// dedicated component
-.header {
-  background-color: black;
-  padding: 12px;
-  font-size: 24px;
-  text-align: left;
-
-  a {
-    text-decoration: none;
-    color: white;
+  &-body {
+    overflow-y: scroll;
+    padding-bottom: calc(map-get($settings, footer-height) + 16px);
+    height: calc(
+      100% - map-get($settings, footer-height) -
+        map-get($settings, header-height)
+    );
+    box-sizing: border-box;
   }
 }
 </style>
